@@ -13,4 +13,5 @@ PORT = 8000
 HEALTH_CHECK_TIMEOUT = 120
 HEALTH_CHECK_INTERVAL = 1
 PROCESS_TERMINATE_TIMEOUT = 10
-MODEL_WEIGHTS_DIR = r"/data2/home/songzhihua/LLM/llm_playground/model_weights"
+MODEL_WEIGHTS_DIR = r"WarwickSong/model_weights"
+
