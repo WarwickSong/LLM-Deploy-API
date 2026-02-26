@@ -117,7 +117,7 @@ EMBEDDING2LOADER = {
 模型权重应按照以下目录结构存放：
 
 ```
-model_weights/
+MODEL_WEIGHTS_DIR/
 ├── Qwen/
 │   ├── Qwen3-8B/
 │   ├── Qwen3-30B-A3B-Instruct-2507/
@@ -224,7 +224,43 @@ Content-Type: application/json
 }
 ```
 
-### 4. 文本嵌入
+### 4. 多模态生成（Qwen3-VL）
+
+```bash
+POST http://127.0.0.1:8000/generate
+Content-Type: application/json
+
+{
+  "model_name": "Qwen/Qwen3-VL-8B-Thinking",
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+            {
+                "type": "image", 
+                "image": "base64-encoded-image-string"
+            },
+            {
+                "type": "text", 
+                "text": "你好，请描述一下这张图片。"
+            }
+        ]
+    }
+  ],
+  "max_new_tokens": 8192
+}
+```
+
+**响应示例**：
+
+```json
+{
+  "thinking": ["思考内容..."],
+  "response": ["这张图片是一张人在沙滩上的照片。"]
+}
+```
+
+### 5. 文本嵌入
 
 ```bash
 POST http://127.0.0.1:8000/embedding
@@ -356,4 +392,3 @@ unload_model("Qwen/Qwen3-8B")
 - 添加认证和授权机制
 - 支持流式输出
 - 添加日志和监控
-

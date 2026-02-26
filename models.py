@@ -69,7 +69,7 @@ def load_model_and_processor(model_name: str, model_path: str):
     # 加载模型
     model = model_loader.from_pretrained(
         model_path,
-        torch_dtype=torch.bfloat16,
+        dtype=torch.bfloat16,
         device_map="auto",
     )
     
@@ -104,7 +104,7 @@ def load_embedding_model(model_name: str, model_path: str):
         raise ValueError(f"不支持的embedding模型: {model_name}")
     
     # 加载embedding模型
-    model = embedding_loader.from_pretrained(
+    model = embedding_loader(
         model_path,
         query_instruction_for_retrieval="为这个文本生成表示以用于检索相关内容：",
         use_fp16=True,
@@ -147,9 +147,29 @@ def generate_response(
             - thinking: 模型生成的思考字符串列表
             - response: 模型生成的响应字符串列表
     """
+    # 检测模型类型并处理输入格式
+    # 检查是否为VL模型（通过模型类名判断，更准确的检测方法）
+    model_class_name = str(model.__class__)
+    # 检查类名是否包含'VL'（大写），这是Qwen VL模型的特征
+    is_vl_model = 'VL' in model_class_name
+    
+    # 处理VL模型的输入格式
+    processed_messages = []
+    for msg in messages:
+        processed_msg = msg.copy()
+        # 检查content是否为字符串，如果是VL模型且content是字符串，则转换为列表格式
+        if is_vl_model and isinstance(processed_msg.get('content'), str):
+            processed_msg['content'] = [
+                {
+                    "type": "text",
+                    "text": processed_msg['content']
+                }
+            ]
+        processed_messages.append(processed_msg)
+    
     # 准备模型输入
     model_inputs = processor.apply_chat_template(
-        messages, 
+        processed_messages, 
         tokenize=True, 
         add_generation_prompt=True,
         return_dict=True,
