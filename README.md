@@ -91,7 +91,7 @@ HEALTH_CHECK_INTERVAL = 1
 PROCESS_TERMINATE_TIMEOUT = 10
 
 # 模型权重根目录
-MODEL_WEIGHTS_DIR = r"/data2/home/songzhihua/LLM/llm_playground/model_weights"
+MODEL_WEIGHTS_DIR = r"WarwickSong/model_weights"
 ```
 
 如果可加载的模型权重有增加，需要在 `models.py` 中的 `MODELS2LOADER` 和 `EMBEDDING2LOADER` 添加对应的模型名称和相应的加载函数。
@@ -356,3 +356,4 @@ unload_model("Qwen/Qwen3-8B")
 - 添加认证和授权机制
 - 支持流式输出
 - 添加日志和监控
+
