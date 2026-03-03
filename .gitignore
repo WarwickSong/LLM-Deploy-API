@@ -1,0 +1,59 @@
+# 大文件
+*.tar
+
+# 配置文件 - 忽略包含敏感信息的配置文件
+*/config/embedding_configs.json
+*/config/LLM_configs.json
+
+# 日志文件
+*.log
+
+# Python 相关文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+env2/
+env3/
+env.local/
+env.development.local/
+env.test.local/
+env.production.local/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IDE 文件
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 构建文件
+build/
+dist/
+*.egg-info/
+
+# 数据文件
+data/
+*.zip
+*.tar.gz
+*.tar.bz2
+*.rar
+
+# 测试文件
+.pytest_cache/
+coverage.xml
+.coverage
+
+# 其他临时文件
+*.tmp
+*.temp
+.cache/

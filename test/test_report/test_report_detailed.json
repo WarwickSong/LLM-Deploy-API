@@ -1,0 +1,498 @@
+{
+  "start_time": "2026-02-27T11:09:25.110687",
+  "end_time": "2026-02-27T11:48:35.129818",
+  "duration": "0:39:10.019131",
+  "summary": {
+    "passed": 34,
+    "failed": 1,
+    "total": 35
+  },
+  "test_categories": {
+    "environment": [],
+    "load_unload": [
+      "模型加载测试 - Qwen/Qwen3-8B",
+      "模型加载验证 - Qwen/Qwen3-8B",
+      "模型卸载测试 - Qwen/Qwen3-8B",
+      "模型卸载验证 - Qwen/Qwen3-8B",
+      "模型加载测试 - Qwen/Qwen3-30B-A3B-Instruct-2507",
+      "模型加载测试 - Qwen/Qwen3-VL-8B-Thinking",
+      "模型加载验证 - Qwen/Qwen3-VL-8B-Thinking",
+      "模型卸载测试 - Qwen/Qwen3-VL-8B-Thinking",
+      "模型卸载验证 - Qwen/Qwen3-VL-8B-Thinking",
+      "模型加载测试 - BAAI/bge-large-zh-v1.5",
+      "模型加载验证 - BAAI/bge-large-zh-v1.5",
+      "模型卸载测试 - BAAI/bge-large-zh-v1.5",
+      "模型卸载验证 - BAAI/bge-large-zh-v1.5",
+      "模型加载测试 - BAAI/bge-m3",
+      "模型加载验证 - BAAI/bge-m3",
+      "模型卸载测试 - BAAI/bge-m3",
+      "模型卸载验证 - BAAI/bge-m3"
+    ],
+    "basic_functions": [
+      "文本生成测试 - Qwen/Qwen3-8B - 简单问候",
+      "文本生成测试 - Qwen/Qwen3-8B - 技术问题",
+      "文本生成测试 - Qwen/Qwen3-8B - 创意写作",
+      "问答交互测试 - Qwen/Qwen3-8B - 常识问题",
+      "问答交互测试 - Qwen/Qwen3-8B - 多轮对话",
+      "文本模型专用测试 - Qwen/Qwen3-8B - 长文本生成",
+      "文本模型专用测试 - Qwen/Qwen3-30B-A3B-Instruct-2507 - 长文本生成",
+      "性能基准测试 - Qwen/Qwen3-8B - 文本生成",
+      "性能基准测试 - Qwen/Qwen3-30B-A3B-Instruct-2507 - 文本生成"
+    ],
+    "specific_scenarios": [
+      "多模态模型专用测试 - Qwen/Qwen3-VL-8B-Thinking - 思考模式",
+      "嵌入模型专用测试 - BAAI/bge-large-zh-v1.5 - 文本嵌入",
+      "嵌入模型专用测试 - BAAI/bge-m3 - 文本嵌入"
+    ],
+    "performance": [
+      "性能基准测试 - BAAI/bge-large-zh-v1.5 - 文本嵌入",
+      "性能基准测试 - BAAI/bge-m3 - 文本嵌入"
+    ]
+  },
+  "tests": {
+    "依赖项检查": {
+      "status": "PASSED",
+      "message": "所有必要的依赖项已安装",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:10:02.996777"
+    },
+    "硬件资源检查": {
+      "status": "PASSED",
+      "message": "硬件资源检查通过",
+      "performance_data": {
+        "memory_gb": 251.79,
+        "available_memory_gb": 242.17,
+        "cpu_count": 24,
+        "gpu_available": true,
+        "gpu_count": 4
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:10:12.503167"
+    },
+    "模型文件检查": {
+      "status": "PASSED",
+      "message": "所有模型文件路径存在",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:10:12.503341"
+    },
+    "API服务检查": {
+      "status": "PASSED",
+      "message": "API服务可正常访问",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:10:12.508993"
+    },
+    "模型加载测试 - Qwen/Qwen3-8B": {
+      "status": "PASSED",
+      "message": "模型 Qwen/Qwen3-8B 加载成功",
+      "performance_data": {
+        "load_time_seconds": 79.36,
+        "memory_used_mb": 994.84
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:11:31.876623"
+    },
+    "模型加载验证 - Qwen/Qwen3-8B": {
+      "status": "PASSED",
+      "message": "模型 Qwen/Qwen3-8B 在可用模型列表中",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:11:31.880018"
+    },
+    "模型卸载测试 - Qwen/Qwen3-8B": {
+      "status": "PASSED",
+      "message": "模型 Qwen/Qwen3-8B 卸载成功",
+      "performance_data": {
+        "unload_time_seconds": 0.32,
+        "memory_freed_mb": 847.09
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:11:32.199160"
+    },
+    "模型卸载验证 - Qwen/Qwen3-8B": {
+      "status": "PASSED",
+      "message": "模型 Qwen/Qwen3-8B 已从可用模型列表中移除",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:11:32.203469"
+    },
+    "模型加载测试 - Qwen/Qwen3-30B-A3B-Instruct-2507": {
+      "status": "FAILED",
+      "message": "模型 Qwen/Qwen3-30B-A3B-Instruct-2507 加载失败: 请求失败",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:16:37.246006"
+    },
+    "模型加载测试 - Qwen/Qwen3-VL-8B-Thinking": {
+      "status": "PASSED",
+      "message": "模型 Qwen/Qwen3-VL-8B-Thinking 加载成功",
+      "performance_data": {
+        "load_time_seconds": 147.55,
+        "memory_used_mb": 1333.84
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:19:19.810910"
+    },
+    "模型加载验证 - Qwen/Qwen3-VL-8B-Thinking": {
+      "status": "PASSED",
+      "message": "模型 Qwen/Qwen3-VL-8B-Thinking 在可用模型列表中",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:19:19.814301"
+    },
+    "模型卸载测试 - Qwen/Qwen3-VL-8B-Thinking": {
+      "status": "PASSED",
+      "message": "模型 Qwen/Qwen3-VL-8B-Thinking 卸载成功",
+      "performance_data": {
+        "unload_time_seconds": 0.37,
+        "memory_freed_mb": 903.1
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:19:20.183320"
+    },
+    "模型卸载验证 - Qwen/Qwen3-VL-8B-Thinking": {
+      "status": "PASSED",
+      "message": "模型 Qwen/Qwen3-VL-8B-Thinking 已从可用模型列表中移除",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:19:20.187377"
+    },
+    "模型加载测试 - BAAI/bge-large-zh-v1.5": {
+      "status": "PASSED",
+      "message": "模型 BAAI/bge-large-zh-v1.5 加载成功",
+      "performance_data": {
+        "load_time_seconds": 58.09,
+        "memory_used_mb": 7556.4
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:20:23.291885"
+    },
+    "模型加载验证 - BAAI/bge-large-zh-v1.5": {
+      "status": "PASSED",
+      "message": "模型 BAAI/bge-large-zh-v1.5 在可用模型列表中",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:20:23.295464"
+    },
+    "模型卸载测试 - BAAI/bge-large-zh-v1.5": {
+      "status": "PASSED",
+      "message": "模型 BAAI/bge-large-zh-v1.5 卸载成功",
+      "performance_data": {
+        "unload_time_seconds": 0.47,
+        "memory_freed_mb": 4303.94
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:20:23.765552"
+    },
+    "模型卸载验证 - BAAI/bge-large-zh-v1.5": {
+      "status": "PASSED",
+      "message": "模型 BAAI/bge-large-zh-v1.5 已从可用模型列表中移除",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:20:23.769898"
+    },
+    "模型加载测试 - BAAI/bge-m3": {
+      "status": "PASSED",
+      "message": "模型 BAAI/bge-m3 加载成功",
+      "performance_data": {
+        "load_time_seconds": 57.26,
+        "memory_used_mb": 8995.34
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:21:26.039987"
+    },
+    "模型加载验证 - BAAI/bge-m3": {
+      "status": "PASSED",
+      "message": "模型 BAAI/bge-m3 在可用模型列表中",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:21:26.044425"
+    },
+    "模型卸载测试 - BAAI/bge-m3": {
+      "status": "PASSED",
+      "message": "模型 BAAI/bge-m3 卸载成功",
+      "performance_data": {
+        "unload_time_seconds": 0.42,
+        "memory_freed_mb": 4579.99
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:21:26.463859"
+    },
+    "模型卸载验证 - BAAI/bge-m3": {
+      "status": "PASSED",
+      "message": "模型 BAAI/bge-m3 已从可用模型列表中移除",
+      "performance_data": null,
+      "error": null,
+      "timestamp": "2026-02-27T11:21:26.468246"
+    },
+    "文本生成测试 - Qwen/Qwen3-8B - 简单问候": {
+      "status": "PASSED",
+      "message": "文本生成测试通过，模型返回了有效响应",
+      "performance_data": {
+        "response_time_seconds": 5.76,
+        "response_length": 63
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:21:46.304603"
+    },
+    "文本生成测试 - Qwen/Qwen3-8B - 技术问题": {
+      "status": "PASSED",
+      "message": "文本生成测试通过，模型返回了有效响应",
+      "performance_data": {
+        "response_time_seconds": 42.72,
+        "response_length": 1259
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:22:29.021321"
+    },
+    "文本生成测试 - Qwen/Qwen3-8B - 创意写作": {
+      "status": "PASSED",
+      "message": "文本生成测试通过，模型返回了有效响应",
+      "performance_data": {
+        "response_time_seconds": 27.98,
+        "response_length": 673
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:22:57.001919"
+    },
+    "问答交互测试 - Qwen/Qwen3-8B - 常识问题": {
+      "status": "PASSED",
+      "message": "问答交互测试通过，找到 1 个期望关键词",
+      "performance_data": {
+        "response_time_seconds": 0.43,
+        "found_keywords": [
+          "北京"
+        ],
+        "total_keywords": 1
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:22:57.429709"
+    },
+    "问答交互测试 - Qwen/Qwen3-8B - 多轮对话": {
+      "status": "PASSED",
+      "message": "问答交互测试通过，找到 2 个期望关键词",
+      "performance_data": {
+        "response_time_seconds": 42.35,
+        "found_keywords": [
+          "简单",
+          "丰富的库"
+        ],
+        "total_keywords": 4
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:23:39.783707"
+    },
+    "文本模型专用测试 - Qwen/Qwen3-8B - 长文本生成": {
+      "status": "PASSED",
+      "message": "长文本生成测试通过，生成了 3871 个字符",
+      "performance_data": {
+        "response_time_seconds": 136.88,
+        "response_length": 3871
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:26:07.177045"
+    },
+    "文本模型专用测试 - Qwen/Qwen3-30B-A3B-Instruct-2507 - 长文本生成": {
+      "status": "PASSED",
+      "message": "长文本生成测试通过，生成了 3746 个字符",
+      "performance_data": {
+        "response_time_seconds": 521.54,
+        "response_length": 3746
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:34:49.099129"
+    },
+    "多模态模型专用测试 - Qwen/Qwen3-VL-8B-Thinking - 思考模式": {
+      "status": "PASSED",
+      "message": "思考模式测试通过，模型生成了思考过程",
+      "performance_data": {
+        "response_time_seconds": 51.61,
+        "has_thinking": true,
+        "has_response": true
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:35:51.046419"
+    },
+    "嵌入模型专用测试 - BAAI/bge-large-zh-v1.5 - 文本嵌入": {
+      "status": "PASSED",
+      "message": "文本嵌入测试通过，生成了 3 个嵌入向量",
+      "performance_data": {
+        "response_time_seconds": 0.11,
+        "num_embeddings": 3,
+        "embedding_dim": 1024
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:36:22.308600"
+    },
+    "嵌入模型专用测试 - BAAI/bge-m3 - 文本嵌入": {
+      "status": "PASSED",
+      "message": "文本嵌入测试通过，生成了 3 个嵌入向量",
+      "performance_data": {
+        "response_time_seconds": 0.12,
+        "num_embeddings": 3,
+        "embedding_dim": 1024
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:36:56.162401"
+    },
+    "性能基准测试 - Qwen/Qwen3-8B - 文本生成": {
+      "status": "PASSED",
+      "message": "性能测试完成，平均响应时间: 35.04秒",
+      "performance_data": {
+        "measurements": [
+          {
+            "iteration": 1,
+            "response_time_seconds": 35.88,
+            "memory_used_mb": 664.45,
+            "success": true
+          },
+          {
+            "iteration": 2,
+            "response_time_seconds": 34.56,
+            "memory_used_mb": 12.86,
+            "success": true
+          },
+          {
+            "iteration": 3,
+            "response_time_seconds": 34.67,
+            "memory_used_mb": 11.59,
+            "success": true
+          }
+        ],
+        "average_response_time_seconds": 35.04,
+        "average_memory_used_mb": 229.63,
+        "total_iterations": 3,
+        "successful_iterations": 3
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:39:05.095304"
+    },
+    "性能基准测试 - Qwen/Qwen3-30B-A3B-Instruct-2507 - 文本生成": {
+      "status": "PASSED",
+      "message": "性能测试完成，平均响应时间: 137.69秒",
+      "performance_data": {
+        "measurements": [
+          {
+            "iteration": 1,
+            "response_time_seconds": 147.43,
+            "memory_used_mb": 702.41,
+            "success": true
+          },
+          {
+            "iteration": 2,
+            "response_time_seconds": 132.97,
+            "memory_used_mb": 81.38,
+            "success": true
+          },
+          {
+            "iteration": 3,
+            "response_time_seconds": 132.66,
+            "memory_used_mb": 86.48,
+            "success": true
+          }
+        ],
+        "average_response_time_seconds": 137.69,
+        "average_memory_used_mb": 290.09,
+        "total_iterations": 3,
+        "successful_iterations": 3
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:47:00.678187"
+    },
+    "性能基准测试 - BAAI/bge-large-zh-v1.5 - 文本嵌入": {
+      "status": "PASSED",
+      "message": "性能测试完成，平均响应时间: 0.11秒",
+      "performance_data": {
+        "measurements": [
+          {
+            "iteration": 1,
+            "response_time_seconds": 0.11,
+            "memory_used_mb": 8.27,
+            "success": true
+          },
+          {
+            "iteration": 2,
+            "response_time_seconds": 0.1,
+            "memory_used_mb": 0.25,
+            "success": true
+          },
+          {
+            "iteration": 3,
+            "response_time_seconds": 0.11,
+            "memory_used_mb": 0.77,
+            "success": true
+          }
+        ],
+        "average_response_time_seconds": 0.11,
+        "average_memory_used_mb": 3.1,
+        "total_iterations": 3,
+        "successful_iterations": 3
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:47:47.282508"
+    },
+    "性能基准测试 - BAAI/bge-m3 - 文本嵌入": {
+      "status": "PASSED",
+      "message": "性能测试完成，平均响应时间: 0.12秒",
+      "performance_data": {
+        "measurements": [
+          {
+            "iteration": 1,
+            "response_time_seconds": 0.12,
+            "memory_used_mb": 8.44,
+            "success": true
+          },
+          {
+            "iteration": 2,
+            "response_time_seconds": 0.11,
+            "memory_used_mb": 0.17,
+            "success": true
+          },
+          {
+            "iteration": 3,
+            "response_time_seconds": 0.12,
+            "memory_used_mb": -0.38,
+            "success": true
+          }
+        ],
+        "average_response_time_seconds": 0.12,
+        "average_memory_used_mb": 2.74,
+        "total_iterations": 3,
+        "successful_iterations": 3
+      },
+      "error": null,
+      "timestamp": "2026-02-27T11:48:35.129694"
+    }
+  },
+  "statistics": {
+    "success_rate": 97.14,
+    "category_statistics": {
+      "load_unload": {
+        "total": 17,
+        "passed": 16,
+        "failed": 1,
+        "success_rate": 94.12
+      },
+      "basic_functions": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "success_rate": 100.0
+      },
+      "specific_scenarios": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "success_rate": 100.0
+      },
+      "performance": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "success_rate": 100.0
+      }
+    }
+  }
+}

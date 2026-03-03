@@ -5,20 +5,28 @@
 - 模型加载和卸载接口
 - 文本生成接口
 - 文本嵌入接口
+- 优雅退出机制
 """
 
 import os
+import signal
+import sys
+import asyncio
 from fastapi import FastAPI
 from schemas import *
 from model_manager import ModelManager
 from config import (
     MODEL_WEIGHTS_DIR, 
     HOST, 
-    PORT
+    PORT,
+    MAX_CONCURRENT_LOAD,
+    GPU_SERIAL_LOAD,
 )
 
 app = FastAPI()
-manager = ModelManager()
+# 初始化模型管理器，启用 GPU 加载串行以避免显存碎片化
+manager = ModelManager(max_concurrent_load=MAX_CONCURRENT_LOAD, gpu_serial_load=GPU_SERIAL_LOAD)
+shutdown_event = asyncio.Event()
 
 
 def get_model_path(model_name: str) -> str:
@@ -32,6 +40,40 @@ def get_model_path(model_name: str) -> str:
         str: 完整的模型权重路径
     """
     return os.path.join(MODEL_WEIGHTS_DIR, model_name.replace("/", os.sep))
+
+
+async def cleanup_all_models():
+    """
+    清理所有已加载的模型
+
+    在服务退出前调用，确保所有模型进程被正确终止
+    """
+    print("\n正在清理所有模型...")
+    
+    models_to_unload = list(manager.registry.keys())
+    for model_name in models_to_unload:
+        try:
+            result = await manager.unload_model(model_name, auto_cleanup=False)
+            print(f"  ✅ 模型 {model_name} 已卸载")
+        except Exception as e:
+            print(f"  ❌ 卸载模型 {model_name} 时出错: {e}")
+    
+    print("所有模型清理完成")
+
+
+def signal_handler(signum, frame):
+    """
+    信号处理器，用于优雅退出
+
+    在收到SIGTERM或SIGINT信号时，先清理所有模型再退出
+    """
+    print(f"\n收到退出信号: {signum}")
+    shutdown_event.set()
+    sys.exit(0)
+
+
+signal.signal(signal.SIGTERM, signal_handler)
+signal.signal(signal.SIGINT, signal_handler)
 
 
 @app.post("/model/load")
@@ -59,10 +101,10 @@ async def unload_model(req: LoadModelRequest):
         req: 包含模型名称的请求对象
 
     Returns:
-        dict: 包含卸载状态的响应
+        dict: 包含卸载状态和清理结果的响应
     """
-    await manager.unload_model(req.model_name)
-    return {"status": "unloaded"}
+    result = await manager.unload_model(req.model_name)
+    return result
 
 
 @app.get("/model/list")
@@ -74,6 +116,32 @@ async def list_models():
         dict: 包含所有已加载模型信息的字典
     """
     return manager.list_models()
+
+
+@app.post("/model/cleanup")
+async def cleanup_zombie_processes():
+    """
+    清理所有与模型相关的僵尸进程
+
+    Returns:
+        dict: 清理结果，包含清理的进程数量
+    """
+    result = manager.cleanup_zombie_processes()
+    return result
+
+
+@app.post("/shutdown")
+async def shutdown():
+    """
+    优雅关闭服务
+
+    清理所有已加载的模型后关闭服务
+
+    Returns:
+        dict: 关闭状态
+    """
+    await cleanup_all_models()
+    return {"status": "shutdown", "message": "服务已优雅关闭"}
 
 
 @app.post("/generate")
@@ -127,4 +195,20 @@ async def embedding(req: EmbeddingRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host=HOST, port=PORT)
+    
+    print("=" * 60)
+    print("LLM部署系统 - 主服务")
+    print(f"服务地址: http://{HOST}:{PORT}")
+    print("按 Ctrl+C 优雅退出服务")
+    print("=" * 60)
+    
+    try:
+        uvicorn.run(app, host=HOST, port=PORT)
+    except KeyboardInterrupt:
+        print("\n\n正在优雅退出...")
+        asyncio.run(cleanup_all_models())
+        print("服务已停止")
+    except Exception as e:
+        print(f"\n服务异常退出: {e}")
+        asyncio.run(cleanup_all_models())
+        raise

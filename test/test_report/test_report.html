@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM部署系统测试报告</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .summary {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .summary-item {
+            display: inline-block;
+            margin-right: 30px;
+            font-size: 16px;
+        }
+        .summary-item .value {
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .passed {
+            color: green;
+        }
+        .failed {
+            color: red;
+        }
+        .category {
+            margin-bottom: 30px;
+        }
+        .category h2 {
+            color: #555;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .test-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ddd;
+        }
+        .test-item.passed {
+            border-left-color: green;
+        }
+        .test-item.failed {
+            border-left-color: red;
+        }
+        .test-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .test-message {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .test-error {
+            color: red;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        .performance-data {
+            background-color: #e8f4f8;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .timestamp {
+            color: #999;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LLM部署系统测试报告</h1>
+        
+        <div class="summary">
+            <div class="summary-item">
+                开始时间: <span class="value">2026-02-27T11:09:25.110687</span>
+            </div>
+            <div class="summary-item">
+                结束时间: <span class="value">2026-02-27T11:48:35.129818</span>
+            </div>
+            <div class="summary-item">
+                测试时长: <span class="value">0:39:10.019131</span>
+            </div>
+            <div class="summary-item">
+                总测试数: <span class="value">35</span>
+            </div>
+            <div class="summary-item">
+                通过: <span class="value passed">34</span>
+            </div>
+            <div class="summary-item">
+                失败: <span class="value failed">1</span>
+            </div>
+            <div class="summary-item">
+                成功率: <span class="value">97.14%</span>
+            </div>
+        </div>
+        
+        <div class='category'><h2>模型加载/卸载</h2><div class='test-item passed'><div class='test-name'>模型加载测试 - Qwen/Qwen3-8B</div><div class='test-message'>模型 Qwen/Qwen3-8B 加载成功</div><div class='performance-data'>{
+  "load_time_seconds": 79.36,
+  "memory_used_mb": 994.84
+}</div><div class='timestamp'>2026-02-27T11:11:31.876623</div></div><div class='test-item passed'><div class='test-name'>模型加载验证 - Qwen/Qwen3-8B</div><div class='test-message'>模型 Qwen/Qwen3-8B 在可用模型列表中</div><div class='timestamp'>2026-02-27T11:11:31.880018</div></div><div class='test-item passed'><div class='test-name'>模型卸载测试 - Qwen/Qwen3-8B</div><div class='test-message'>模型 Qwen/Qwen3-8B 卸载成功</div><div class='performance-data'>{
+  "unload_time_seconds": 0.32,
+  "memory_freed_mb": 847.09
+}</div><div class='timestamp'>2026-02-27T11:11:32.199160</div></div><div class='test-item passed'><div class='test-name'>模型卸载验证 - Qwen/Qwen3-8B</div><div class='test-message'>模型 Qwen/Qwen3-8B 已从可用模型列表中移除</div><div class='timestamp'>2026-02-27T11:11:32.203469</div></div><div class='test-item failed'><div class='test-name'>模型加载测试 - Qwen/Qwen3-30B-A3B-Instruct-2507</div><div class='test-message'>模型 Qwen/Qwen3-30B-A3B-Instruct-2507 加载失败: 请求失败</div><div class='timestamp'>2026-02-27T11:16:37.246006</div></div><div class='test-item passed'><div class='test-name'>模型加载测试 - Qwen/Qwen3-VL-8B-Thinking</div><div class='test-message'>模型 Qwen/Qwen3-VL-8B-Thinking 加载成功</div><div class='performance-data'>{
+  "load_time_seconds": 147.55,
+  "memory_used_mb": 1333.84
+}</div><div class='timestamp'>2026-02-27T11:19:19.810910</div></div><div class='test-item passed'><div class='test-name'>模型加载验证 - Qwen/Qwen3-VL-8B-Thinking</div><div class='test-message'>模型 Qwen/Qwen3-VL-8B-Thinking 在可用模型列表中</div><div class='timestamp'>2026-02-27T11:19:19.814301</div></div><div class='test-item passed'><div class='test-name'>模型卸载测试 - Qwen/Qwen3-VL-8B-Thinking</div><div class='test-message'>模型 Qwen/Qwen3-VL-8B-Thinking 卸载成功</div><div class='performance-data'>{
+  "unload_time_seconds": 0.37,
+  "memory_freed_mb": 903.1
+}</div><div class='timestamp'>2026-02-27T11:19:20.183320</div></div><div class='test-item passed'><div class='test-name'>模型卸载验证 - Qwen/Qwen3-VL-8B-Thinking</div><div class='test-message'>模型 Qwen/Qwen3-VL-8B-Thinking 已从可用模型列表中移除</div><div class='timestamp'>2026-02-27T11:19:20.187377</div></div><div class='test-item passed'><div class='test-name'>模型加载测试 - BAAI/bge-large-zh-v1.5</div><div class='test-message'>模型 BAAI/bge-large-zh-v1.5 加载成功</div><div class='performance-data'>{
+  "load_time_seconds": 58.09,
+  "memory_used_mb": 7556.4
+}</div><div class='timestamp'>2026-02-27T11:20:23.291885</div></div><div class='test-item passed'><div class='test-name'>模型加载验证 - BAAI/bge-large-zh-v1.5</div><div class='test-message'>模型 BAAI/bge-large-zh-v1.5 在可用模型列表中</div><div class='timestamp'>2026-02-27T11:20:23.295464</div></div><div class='test-item passed'><div class='test-name'>模型卸载测试 - BAAI/bge-large-zh-v1.5</div><div class='test-message'>模型 BAAI/bge-large-zh-v1.5 卸载成功</div><div class='performance-data'>{
+  "unload_time_seconds": 0.47,
+  "memory_freed_mb": 4303.94
+}</div><div class='timestamp'>2026-02-27T11:20:23.765552</div></div><div class='test-item passed'><div class='test-name'>模型卸载验证 - BAAI/bge-large-zh-v1.5</div><div class='test-message'>模型 BAAI/bge-large-zh-v1.5 已从可用模型列表中移除</div><div class='timestamp'>2026-02-27T11:20:23.769898</div></div><div class='test-item passed'><div class='test-name'>模型加载测试 - BAAI/bge-m3</div><div class='test-message'>模型 BAAI/bge-m3 加载成功</div><div class='performance-data'>{
+  "load_time_seconds": 57.26,
+  "memory_used_mb": 8995.34
+}</div><div class='timestamp'>2026-02-27T11:21:26.039987</div></div><div class='test-item passed'><div class='test-name'>模型加载验证 - BAAI/bge-m3</div><div class='test-message'>模型 BAAI/bge-m3 在可用模型列表中</div><div class='timestamp'>2026-02-27T11:21:26.044425</div></div><div class='test-item passed'><div class='test-name'>模型卸载测试 - BAAI/bge-m3</div><div class='test-message'>模型 BAAI/bge-m3 卸载成功</div><div class='performance-data'>{
+  "unload_time_seconds": 0.42,
+  "memory_freed_mb": 4579.99
+}</div><div class='timestamp'>2026-02-27T11:21:26.463859</div></div><div class='test-item passed'><div class='test-name'>模型卸载验证 - BAAI/bge-m3</div><div class='test-message'>模型 BAAI/bge-m3 已从可用模型列表中移除</div><div class='timestamp'>2026-02-27T11:21:26.468246</div></div></div><div class='category'><h2>基础功能</h2><div class='test-item passed'><div class='test-name'>文本生成测试 - Qwen/Qwen3-8B - 简单问候</div><div class='test-message'>文本生成测试通过，模型返回了有效响应</div><div class='performance-data'>{
+  "response_time_seconds": 5.76,
+  "response_length": 63
+}</div><div class='timestamp'>2026-02-27T11:21:46.304603</div></div><div class='test-item passed'><div class='test-name'>文本生成测试 - Qwen/Qwen3-8B - 技术问题</div><div class='test-message'>文本生成测试通过，模型返回了有效响应</div><div class='performance-data'>{
+  "response_time_seconds": 42.72,
+  "response_length": 1259
+}</div><div class='timestamp'>2026-02-27T11:22:29.021321</div></div><div class='test-item passed'><div class='test-name'>文本生成测试 - Qwen/Qwen3-8B - 创意写作</div><div class='test-message'>文本生成测试通过，模型返回了有效响应</div><div class='performance-data'>{
+  "response_time_seconds": 27.98,
+  "response_length": 673
+}</div><div class='timestamp'>2026-02-27T11:22:57.001919</div></div><div class='test-item passed'><div class='test-name'>问答交互测试 - Qwen/Qwen3-8B - 常识问题</div><div class='test-message'>问答交互测试通过，找到 1 个期望关键词</div><div class='performance-data'>{
+  "response_time_seconds": 0.43,
+  "found_keywords": [
+    "北京"
+  ],
+  "total_keywords": 1
+}</div><div class='timestamp'>2026-02-27T11:22:57.429709</div></div><div class='test-item passed'><div class='test-name'>问答交互测试 - Qwen/Qwen3-8B - 多轮对话</div><div class='test-message'>问答交互测试通过，找到 2 个期望关键词</div><div class='performance-data'>{
+  "response_time_seconds": 42.35,
+  "found_keywords": [
+    "简单",
+    "丰富的库"
+  ],
+  "total_keywords": 4
+}</div><div class='timestamp'>2026-02-27T11:23:39.783707</div></div><div class='test-item passed'><div class='test-name'>文本模型专用测试 - Qwen/Qwen3-8B - 长文本生成</div><div class='test-message'>长文本生成测试通过，生成了 3871 个字符</div><div class='performance-data'>{
+  "response_time_seconds": 136.88,
+  "response_length": 3871
+}</div><div class='timestamp'>2026-02-27T11:26:07.177045</div></div><div class='test-item passed'><div class='test-name'>文本模型专用测试 - Qwen/Qwen3-30B-A3B-Instruct-2507 - 长文本生成</div><div class='test-message'>长文本生成测试通过，生成了 3746 个字符</div><div class='performance-data'>{
+  "response_time_seconds": 521.54,
+  "response_length": 3746
+}</div><div class='timestamp'>2026-02-27T11:34:49.099129</div></div><div class='test-item passed'><div class='test-name'>性能基准测试 - Qwen/Qwen3-8B - 文本生成</div><div class='test-message'>性能测试完成，平均响应时间: 35.04秒</div><div class='performance-data'>{
+  "measurements": [
+    {
+      "iteration": 1,
+      "response_time_seconds": 35.88,
+      "memory_used_mb": 664.45,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "response_time_seconds": 34.56,
+      "memory_used_mb": 12.86,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "response_time_seconds": 34.67,
+      "memory_used_mb": 11.59,
+      "success": true
+    }
+  ],
+  "average_response_time_seconds": 35.04,
+  "average_memory_used_mb": 229.63,
+  "total_iterations": 3,
+  "successful_iterations": 3
+}</div><div class='timestamp'>2026-02-27T11:39:05.095304</div></div><div class='test-item passed'><div class='test-name'>性能基准测试 - Qwen/Qwen3-30B-A3B-Instruct-2507 - 文本生成</div><div class='test-message'>性能测试完成，平均响应时间: 137.69秒</div><div class='performance-data'>{
+  "measurements": [
+    {
+      "iteration": 1,
+      "response_time_seconds": 147.43,
+      "memory_used_mb": 702.41,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "response_time_seconds": 132.97,
+      "memory_used_mb": 81.38,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "response_time_seconds": 132.66,
+      "memory_used_mb": 86.48,
+      "success": true
+    }
+  ],
+  "average_response_time_seconds": 137.69,
+  "average_memory_used_mb": 290.09,
+  "total_iterations": 3,
+  "successful_iterations": 3
+}</div><div class='timestamp'>2026-02-27T11:47:00.678187</div></div></div><div class='category'><h2>专用场景</h2><div class='test-item passed'><div class='test-name'>多模态模型专用测试 - Qwen/Qwen3-VL-8B-Thinking - 思考模式</div><div class='test-message'>思考模式测试通过，模型生成了思考过程</div><div class='performance-data'>{
+  "response_time_seconds": 51.61,
+  "has_thinking": true,
+  "has_response": true
+}</div><div class='timestamp'>2026-02-27T11:35:51.046419</div></div><div class='test-item passed'><div class='test-name'>嵌入模型专用测试 - BAAI/bge-large-zh-v1.5 - 文本嵌入</div><div class='test-message'>文本嵌入测试通过，生成了 3 个嵌入向量</div><div class='performance-data'>{
+  "response_time_seconds": 0.11,
+  "num_embeddings": 3,
+  "embedding_dim": 1024
+}</div><div class='timestamp'>2026-02-27T11:36:22.308600</div></div><div class='test-item passed'><div class='test-name'>嵌入模型专用测试 - BAAI/bge-m3 - 文本嵌入</div><div class='test-message'>文本嵌入测试通过，生成了 3 个嵌入向量</div><div class='performance-data'>{
+  "response_time_seconds": 0.12,
+  "num_embeddings": 3,
+  "embedding_dim": 1024
+}</div><div class='timestamp'>2026-02-27T11:36:56.162401</div></div></div><div class='category'><h2>性能基准</h2><div class='test-item passed'><div class='test-name'>性能基准测试 - BAAI/bge-large-zh-v1.5 - 文本嵌入</div><div class='test-message'>性能测试完成，平均响应时间: 0.11秒</div><div class='performance-data'>{
+  "measurements": [
+    {
+      "iteration": 1,
+      "response_time_seconds": 0.11,
+      "memory_used_mb": 8.27,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "response_time_seconds": 0.1,
+      "memory_used_mb": 0.25,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "response_time_seconds": 0.11,
+      "memory_used_mb": 0.77,
+      "success": true
+    }
+  ],
+  "average_response_time_seconds": 0.11,
+  "average_memory_used_mb": 3.1,
+  "total_iterations": 3,
+  "successful_iterations": 3
+}</div><div class='timestamp'>2026-02-27T11:47:47.282508</div></div><div class='test-item passed'><div class='test-name'>性能基准测试 - BAAI/bge-m3 - 文本嵌入</div><div class='test-message'>性能测试完成，平均响应时间: 0.12秒</div><div class='performance-data'>{
+  "measurements": [
+    {
+      "iteration": 1,
+      "response_time_seconds": 0.12,
+      "memory_used_mb": 8.44,
+      "success": true
+    },
+    {
+      "iteration": 2,
+      "response_time_seconds": 0.11,
+      "memory_used_mb": 0.17,
+      "success": true
+    },
+    {
+      "iteration": 3,
+      "response_time_seconds": 0.12,
+      "memory_used_mb": -0.38,
+      "success": true
+    }
+  ],
+  "average_response_time_seconds": 0.12,
+  "average_memory_used_mb": 2.74,
+  "total_iterations": 3,
+  "successful_iterations": 3
+}</div><div class='timestamp'>2026-02-27T11:48:35.129694</div></div></div>
+    </div>
+</body>
+</html>
+        

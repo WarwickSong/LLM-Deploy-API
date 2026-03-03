@@ -12,6 +12,9 @@ import argparse
 import asyncio
 import socket
 import uvicorn
+import torch
+import signal
+import sys
 from fastapi import FastAPI
 from schemas import GenerateRequest, EmbeddingRequest
 from models import (
@@ -19,15 +22,64 @@ from models import (
     load_embedding_model,
     generate_response,
     get_embedding,
-    MODELS2LOADER,
+    MODEL2LOADER,
     EMBEDDING2LOADER,
+)
+from config import(
+    MAX_CONCURRENT_INFERENCE
 )
 
 app = FastAPI()
 model = None
 processor = None
 embedding_model = None
-model_lock = asyncio.Lock()
+
+# 控制最大并发推理请求数，避免GPU显存溢出
+# 可根据实际硬件配置和测试结果调整
+model_semaphore = asyncio.Semaphore(MAX_CONCURRENT_INFERENCE)
+
+
+def cleanup_resources():
+    """
+    清理GPU资源和模型对象
+    """
+    global model, processor, embedding_model
+    
+    try:
+        if model is not None:
+            del model
+            model = None
+    except Exception:
+        pass
+    
+    try:
+        if processor is not None:
+            del processor
+            processor = None
+    except Exception:
+        pass
+    
+    try:
+        if embedding_model is not None:
+            del embedding_model
+            embedding_model = None
+    except Exception:
+        pass
+    
+    torch.cuda.empty_cache()
+    torch.cuda.synchronize()
+
+
+def signal_handler(signum, frame):
+    """
+    信号处理器，用于优雅退出
+    """
+    cleanup_resources()
+    sys.exit(0)
+
+
+signal.signal(signal.SIGTERM, signal_handler)
+signal.signal(signal.SIGINT, signal_handler)
 
 
 @app.get("/health")
@@ -52,7 +104,7 @@ async def generate(req: GenerateRequest):
     Returns:
         dict: 包含思考内容和生成响应的字典
     """
-    async with model_lock:
+    async with model_semaphore:
         thinking, response = generate_response(
             model,
             processor,
@@ -73,7 +125,7 @@ async def embedding(req: EmbeddingRequest):
     Returns:
         dict: 包含文本嵌入向量的字典
     """
-    async with model_lock:
+    async with model_semaphore:
         result = get_embedding(
             embedding_model,
             req.texts,
@@ -109,23 +161,34 @@ def main():
     parser.add_argument("--model_path")
     args = parser.parse_args()
 
-    # 根据模型类型加载
-    if args.model_name in EMBEDDING2LOADER:  # 嵌入模型
-        embedding_model = load_embedding_model(
-            args.model_name, args.model_path
-        )
-    elif args.model_name in MODELS2LOADER:  # 生成模型  
-        model, processor = load_model_and_processor(
-            args.model_name, args.model_path
-        )
-    else:
-        raise ValueError(f"不支持的模型: {args.model_name}")
+    try:
+        # 立即发送加载开始信号
+        print("MODEL_LOADING_STARTED", flush=True)
 
-    port = find_free_port()
+        # 根据模型类型加载
+        if args.model_name in EMBEDDING2LOADER:  # 嵌入模型
+            embedding_model = load_embedding_model(
+                args.model_name, args.model_path
+            )
+        elif args.model_name in MODEL2LOADER:  # 生成模型  
+            model, processor = load_model_and_processor(
+                args.model_name, args.model_path
+            )
+        else:
+            raise ValueError(f"不支持的模型: {args.model_name}")
 
-    print(f"WORKER_PORT:{port}", flush=True)
+        port = find_free_port()
 
-    uvicorn.run(app, host="0.0.0.0", port=port)
+        print(f"WORKER_PORT:{port}", flush=True)
+
+        uvicorn.run(app, host="0.0.0.0", port=port)
+    except Exception as e:
+        # 打印错误信息到 stderr，这样父进程可以读取
+        import traceback
+        error_msg = f"模型加载失败: {str(e)}\n{traceback.format_exc()}"
+        print(error_msg, file=sys.stderr, flush=True)
+        # 退出进程，返回非零状态码
+        sys.exit(1)
 
 
 if __name__ == "__main__":

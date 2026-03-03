@@ -32,7 +32,7 @@ MAX_NEW_TOKENS = 8192  # 最大新生成token数
 MIN_PIXELS = 256*28*28 
 MAX_PIXELS = 1536*28*28
 # 模型名称到加载器的映射
-MODELS2LOADER = {  
+MODEL2LOADER = {  
     "Qwen/Qwen3-8B": Qwen3ForCausalLM,
     "Qwen/Qwen3-30B-A3B-Instruct-2507": Qwen3MoeForCausalLM,
     "Qwen/Qwen3-VL-8B-Thinking": Qwen3VLForConditionalGeneration,
@@ -62,7 +62,7 @@ def load_model_and_processor(model_name: str, model_path: str):
     Raises:
         ValueError: 当模型名称不支持时抛出异常
     """
-    model_loader = MODELS2LOADER.get(model_name)
+    model_loader = MODEL2LOADER.get(model_name)
     if not model_loader:
         raise ValueError(f"不支持的模型: {model_name}")
     
